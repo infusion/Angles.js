@@ -1,0 +1,28 @@
+{
+    "name": "angle",
+    "main": "angles.js",
+    "version": "1.0.0",
+    "homepage": "https://github.com/infusion/Angles.js",
+    "description": "A function collection for working with angles",
+    "keywords": [
+        "degree", "degrees", "convert", "radians", "direction", "angle", "angles", "angular", "between"
+    ],
+    "authors": [
+        "Robert Eisele <robert@xarg.org> (http://www.xarg.org/)"
+    ],
+    "license": [
+        "MIT",
+        "GPL"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/infusion/Angles.js.git"
+    },
+    "ignore": [
+        "tests",
+        ".travis.yml",
+        "package.json",
+        "externs.js",
+        "gulpfile.js"
+    ]
+}

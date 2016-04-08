@@ -1,0 +1,30 @@
+{
+    "name": "angles",
+    "title": "angles.js",
+    "version": "0.0.1",
+    "homepage": "https://github.com/infusion/Angles.js",
+    "bugs": "https://github.com/infusion/Angles.js/issues",
+    "description": "A function collection for working with angles",
+    "keywords": ["degree", "degrees", "convert", "radians", "direction", "angle", "angles", "angular", "between"],
+    "author": "Robert Eisele <robert@xarg.org> (http://www.xarg.org/)",
+    "main": "angles",
+    "private": false,
+    "readmeFilename": "README.md",
+    "license": "MIT OR GPL-2.0",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/infusion/Angles.js.git"
+    },
+    "engines": {
+        "node": "*"
+    },
+    "scripts": {
+        "test": "mocha tests/*.js"
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "should": "*",
+        "gulp": "*",
+        "google-closure-compiler": "*"
+    }
+}
