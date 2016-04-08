@@ -8,7 +8,7 @@
 (function(root) {
 
   'use strict';
-  
+
   var TAU = 2 * Math.PI;
 
   var Angles = {
@@ -155,6 +155,13 @@
       }
       return (angle % s + s) % s;
     },
+    'fromSlope': function(p1, p2) {
+
+      var s = this['SCALE'];
+      var angle = (1 + Math.atan((p2[1] - p1[1]) / (p2[0] - p1[0])) / TAU) * s;
+
+      return (angle % s + s) % s;
+    }
   };
 
   if (typeof define === "function" && define["amd"]) {

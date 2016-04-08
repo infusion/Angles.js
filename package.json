@@ -5,7 +5,7 @@
     "homepage": "https://github.com/infusion/Angles.js",
     "bugs": "https://github.com/infusion/Angles.js/issues",
     "description": "A function collection for working with angles",
-    "keywords": ["degree", "degrees", "convert", "radians", "direction", "angle", "angles", "angular", "between"],
+    "keywords": ["degree", "degrees", "convert", "radians", "direction", "slope", "angle", "angles", "angular", "between"],
     "author": "Robert Eisele <robert@xarg.org> (http://www.xarg.org/)",
     "main": "angles",
     "private": false,

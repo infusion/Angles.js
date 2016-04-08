@@ -68,6 +68,10 @@ toGon(n)
 ---
 Calculate gons from current angle (Unit 400)
 
+fromSlope(p1, p2)
+---
+Calculates the angle given by two points (2 element arrays)
+
 fromSinCos(sin, cos)
 ---
 Calculates the original angle (in full resolution) based on the sine and co-sine of the angle.
