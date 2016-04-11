@@ -1,11 +1,11 @@
 {
     "name": "angle",
     "main": "angles.js",
-    "version": "1.0.0",
+    "version": "0.0.2",
     "homepage": "https://github.com/infusion/Angles.js",
     "description": "A function collection for working with angles",
     "keywords": [
-        "degree", "degrees", "convert", "radians", "direction", "slope", "angle", "angles", "angular", "between"
+        "degree", "degrees", "convert", "radians", "direction", "geo", "compass", "cardinal", "slope", "angle", "angles", "angular", "between"
     ],
     "authors": [
         "Robert Eisele <robert@xarg.org> (http://www.xarg.org/)"

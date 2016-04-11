@@ -1,5 +1,5 @@
 /**
- * @license Angles.js v1.0.0 08/04/2016
+ * @license Angles.js v0.0.2 08/04/2016
  *
  * Copyright (c) 2015, Robert Eisele (robert@xarg.org)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -10,6 +10,11 @@
   'use strict';
 
   var TAU = 2 * Math.PI;
+  var EPS = 1e-15;
+
+  var DIRECTIONS = [
+    "N", "NE", "E", "SE", "S", "SW", "W", "NW"
+  ];
 
   var Angles = {
     'SCALE': 360,
@@ -155,12 +160,79 @@
       }
       return (angle % s + s) % s;
     },
+    /**
+     * What is the angle of two points making a line
+     * 
+     * @param {Array} p1 
+     * @param {Array} p2
+     * @returns {number}
+     */
     'fromSlope': function(p1, p2) {
 
       var s = this['SCALE'];
       var angle = (1 + Math.atan((p2[1] - p1[1]) / (p2[0] - p1[0])) / TAU) * s;
 
       return (angle % s + s) % s;
+    },
+    /**
+     * Returns the quadrant 
+     * 
+     * @param {number} x The point x-coordinate
+     * @param {number} y The point y-coordinate
+     * @param {number=} k The optional number of regions in the coordinate-system
+     * @param {number=} shift An optional angle to rotate the coordinate system
+     * @returns {number}
+     */
+    'quadrant': function(x, y, k, shift) {
+
+      var s = this['SCALE'];
+
+      if (k === undefined)
+        k = 4; // How many regions? 4 = quadrant, 8 = octant, ...
+
+      if (shift === undefined)
+        shift = 0; // Rotate the coordinate system by shift° (positiv = counter-clockwise)
+
+      /* shift = PI / k, k = 4:
+       *   I) 45-135
+       *  II) 135-225
+       * III) 225-315
+       *  IV) 315-360
+       */
+
+      /* shift = 0, k = 4:
+       *   I) 0-90
+       *  II) 90-180
+       * III) 180-270
+       *  IV) 270-360
+       */
+
+      var phi = (Math.atan2(y, x) + TAU) / TAU;
+
+      var tmp = phi * s % (s / k);
+
+      if (Math.abs(tmp) < EPS) {
+        return 0;
+      }
+
+      var tmp = Math.floor(k * shift / s + k * phi);
+
+      return 1 + (tmp % k + k) % k;
+    },
+    /**
+     * Calculates the compass direction of the given angle
+     * 
+     * @param {number} angle
+     * @returns {string}
+     */
+    'compass': function(angle) {
+
+      var s = this['SCALE'];
+      var k = DIRECTIONS.length;
+
+      var dir = Math.round((angle / s) * k);
+
+      return DIRECTIONS[(dir % k + k) % k];
     }
   };
 

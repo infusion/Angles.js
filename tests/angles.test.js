@@ -27,7 +27,7 @@ var tests = [
   {m: angles.fromSlope, p: [[1, 1], [5, 10]], r: 66.03751102542185, s: 360},
   {m: angles.fromSlope, p: [[124, 8984], [234, 10322]], r: 85.30015415271288, s: 360},
   {m: angles.fromSlope, p: [[424, 8984], [234, 10322]], r: 278.0821360367614, s: 360},
-  {m: angles.fromSlope, p: [[345, -78445], [3475890, 8495]], r: 1.4329425927144825 , s: 360},
+  {m: angles.fromSlope, p: [[345, -78445], [3475890, 8495]], r: 1.4329425927144825, s: 360},
   {m: angles.shortestDirection, p: [50, 60], r: -1, s: 360},
   {m: angles.shortestDirection, p: [60, 50], r: 1, s: 360},
   {m: angles.shortestDirection, p: [60 + 360 * 3, 50 + 360 * 7], r: 1, s: 360},
@@ -38,17 +38,61 @@ var tests = [
   {m: angles.fromSinCos, p: [Math.sin(-0.7), Math.cos(-0.7)], r: Math.PI * 2 - 0.7, s: Math.PI * 2}
 ];
 
+for (var i = 0; i <= 360; i += 2) {
+
+  if (i % 90 === 0)
+    kl = 0;
+  else if (i < 90)
+    kl = 1;
+  else if (i < 180)
+    kl = 2;
+  else if (i < 270)
+    kl = 3;
+  else
+    kl = 4;
+
+  if (i < 22.5 + 45 * 0) {
+    dir = 'N';
+  } else if (i < 22.5 + 45 * 1) {
+    dir = 'NE';
+  } else if (i < 22.5 + 45 * 2) {
+    dir = 'E';
+  } else if (i < 22.5 + 45 * 3) {
+    dir = 'SE';
+  } else if (i < 22.5 + 45 * 4) {
+    dir = 'S';
+  } else if (i < 22.5 + 45 * 5) {
+    dir = 'SW';
+  } else if (i < 22.5 + 45 * 6) {
+    dir = 'W';
+  } else if (i < 22.5 + 45 * 7) {
+    dir = 'NW';
+  } else {
+    dir = 'N';
+  }
+
+  tests.push({m: angles.quadrant, p: [
+      Math.cos(i / 180 * Math.PI),
+      Math.sin(i / 180 * Math.PI)
+    ], r: kl, s: 360, label: 'Quadrant of angle ' + i});
+
+  tests.push({m: angles.compass, p: [i], r: dir, s: 360, label: 'Direction of angle ' + i});
+}
+
 describe('Angles', function() {
 
   for (var i = 0; i < tests.length; i++) {
 
     (function(i) {
 
-      it('Should work with test #' + (i + 1), function() {
+      it('Should work with test ' + (tests[i].label || "#" + i), function() {
 
         var c = tests[i];
         angles.SCALE = c.s;
-        c.m.apply(angles, c.p).should.be.approximately(c.r, 1e-15);
+        if (typeof c.r === 'string')
+          c.m.apply(angles, c.p).should.be.equal(c.r);
+        else
+          c.m.apply(angles, c.p).should.be.approximately(c.r, 1e-15);
       });
 
     })(i);

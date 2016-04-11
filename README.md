@@ -76,6 +76,10 @@ fromSinCos(sin, cos)
 ---
 Calculates the original angle (in full resolution) based on the sine and co-sine of the angle.
 
+quadrant(x, y[k=4[, shift=0]])
+---
+Calculates the quadrant (with `k=4`, or octant with `k=8`) in which a point with coordinates `x,y` falls. Optionally, the coordinate system can be rotated with the `shift` parameter, which follows the `SCALE`-attribute. A positive value rotates counter-clockwise.
+
 Installation
 ===
 Installing Angles.js is as easy as cloning this repo or use one of the following commands:
