@@ -34,11 +34,11 @@ Functions
 
 normalizeHalf(n)
 ---
-Normalizes an angle to be in the interval [-180, 180)
+Normalizes an angle to be in the interval [-180, 180), if `SCALE` is 360 or [-π, π) if `SCALE` is 2π.
 
 normalize(n)
 ---
-Normalizes an angle to be in the interval [0, 360)
+Normalizes an angle to be in the interval [0, 360), if `SCALE` is 360 or [0, 2π) if `SCALE` is 2π.
 
 shortestDirection(from, to)
 ---
