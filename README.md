@@ -80,6 +80,10 @@ quadrant(x, y[k=4[, shift=0]])
 ---
 Calculates the quadrant (with `k=4`, or octant with `k=8`) in which a point with coordinates `x,y` falls. Optionally, the coordinate system can be rotated with the `shift` parameter, which follows the `SCALE`-attribute. A positive value rotates counter-clockwise.
 
+compass(angle)
+---
+Translates the angle to a point of the compass ("N", "NE", "E", "SE", "S", "SW", "W", "NW"). If you want to want to have the major directions only, remove every second element from the array `DIRECTIONS`.
+
 Installation
 ===
 Installing Angles.js is as easy as cloning this repo or use one of the following commands:

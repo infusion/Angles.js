@@ -1,5 +1,5 @@
 /**
- * @license Angles.js v0.0.2 08/04/2016
+ * @license Angles.js v0.1.0 08/04/2016
  *
  * Copyright (c) 2015, Robert Eisele (robert@xarg.org)
  * Dual licensed under the MIT or GPL Version 2 licenses.
