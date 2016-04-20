@@ -101,20 +101,20 @@ npm install --save angles
 Using Angles.js with the browser
 ===
 ```html
-<script src="fraction.js"></script>
+<script src="angles.js"></script>
 <script>
-    console.log(Fraction("123/456"));
+console.log(Angles.normalize(128));
 </script>
 ```
 
-Using Fraction.js with require.js
+Using Angles.js with require.js
 ===
 ```html
 <script src="require.js"></script>
 <script>
-requirejs(['fraction.js'],
-function(Fraction) {
-    console.log(Fraction("123/456"));
+requirejs(['angles.js'],
+function(Angles) {
+    console.log(Angles.normalize(128));
 });
 </script>
 ```
