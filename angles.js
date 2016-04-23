@@ -170,9 +170,9 @@
     'fromSlope': function(p1, p2) {
 
       var s = this['SCALE'];
-      var angle = (1 + Math.atan2((p2[1] - p1[1]), (p2[0] - p1[0])) / TAU) * s;
+      var angle = (TAU + Math.atan2(p2[1] - p1[1], p2[0] - p1[0])) % TAU;
 
-      return (angle % s + s) % s;
+      return angle / TAU * s;
     },
     /**
      * Returns the quadrant 
