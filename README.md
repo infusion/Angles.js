@@ -24,7 +24,7 @@ angles.SCALE = 60;
 var time = new Date;
 var s = time.getSeconds();
 var m = time.getMinutes();
-var h = time.getHours() / 24 * 60;
+var h = time.getHours() / 23 * 59;
 console.log(angles.between(s, m, h)); // true or false, if seconds clockhand is between the minutes and hours clockhand
 ```
 
