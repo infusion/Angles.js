@@ -1,5 +1,5 @@
 /**
- * @license Angles.js v0.1.0 08/04/2016
+ * @license Angles.js v0.2.0 08/04/2016
  *
  * Copyright (c) 2015, Robert Eisele (robert@xarg.org)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -16,37 +16,47 @@
     "N", "NE", "E", "SE", "S", "SW", "W", "NW"
   ];
 
+  /**
+   * Mathematical modulo
+   * 
+   * @param {number} x
+   * @param {number} m
+   * @returns {number}
+   */
+  function mod(x, m) {
+    return (x % m + m) % m;
+  }
+
   var Angles = {
     'SCALE': 360,
     /**
      * Normalize an arbitrary angle to the interval [-180, 180)
-     * 
+     *
      * @param {number} n
      * @returns {number}
      */
     'normalizeHalf': function(n) {
 
       var c = this['SCALE'];
-      var h = this['SCALE'] / 2;
-      // return mod(a + 180, 360) - 180;
-      return (n % c + c + h) % c - h;
+      var h = c / 2;
+
+      return mod(n + h, c) - h;
     },
     /**
      * Normalize an arbitrary angle to the interval [0, 360)
-     * 
+     *
      * @param {number} n
      * @returns {number}
      */
     'normalize': function(n) {
 
       var c = this['SCALE'];
-      var h = this['SCALE'] / 2;
-      // return mod(a, 360);
-      return (n % c + c) % c;
+
+      return mod(n, c);
     },
     /**
      * Gets the shortest direction to rotate to another angle
-     * 
+     *
      * @param {number} from
      * @param {number} to
      * @returns {number}
@@ -65,7 +75,7 @@
     },
     /**
      * Checks if an angle is between two other angles
-     * 
+     *
      * @param {number} n
      * @param {number} a
      * @param {number} b
@@ -74,9 +84,9 @@
     'between': function(n, a, b) { // Check if an angle n is between a and b
 
       var c = this['SCALE'];
-      n = (n % c + c) % c;
-      a = (a % c + c) % c;
-      b = (b % c + c) % c;
+      n = mod(n, c);
+      a = mod(a, c);
+      b = mod(b, c);
 
       if (a < b)
         return a <= n && n <= b;
@@ -94,7 +104,7 @@
     },
     /**
      * Calculate the minimal distance between two angles
-     * 
+     *
      * @param {number} a
      * @param {number} b
      * @returns {number}
@@ -102,20 +112,21 @@
     'distance': function(a, b) {
 
       var m = this['SCALE'];
+      var h = m / 2;
 
       // One-Liner:
       //return Math.min(mod(a - b, m), mod(b - a, m));
 
       var diff = this['normalizeHalf'](a - b);
 
-      if (diff > m / 2)
+      if (diff > h)
         diff = diff - m;
 
       return Math.abs(diff);
     },
     /**
      * Calculate radians from current angle
-     * 
+     *
      * @param {number} n
      * @returns {number}
      */
@@ -125,7 +136,7 @@
     },
     /**
      * Calculate degrees from current angle
-     * 
+     *
      * @param {number} n
      * @returns {number}
      */
@@ -135,7 +146,7 @@
     },
     /**
      * Calculate gons from current angle
-     * 
+     *
      * @param {number} n
      * @returns {number}
      */
@@ -145,7 +156,7 @@
     },
     /**
      * Given the sine and cosine of an angle, what is the original angle?
-     * 
+     *
      * @param {number} sin
      * @param {number} cos
      * @returns {number}
@@ -158,12 +169,12 @@
       if (sin < 0) {
         angle = s - angle;
       }
-      return (angle % s + s) % s;
+      return mod(angle, s);
     },
     /**
      * What is the angle of two points making a line
-     * 
-     * @param {Array} p1 
+     *
+     * @param {Array} p1
      * @param {Array} p2
      * @returns {number}
      */
@@ -175,8 +186,8 @@
       return angle / TAU * s;
     },
     /**
-     * Returns the quadrant 
-     * 
+     * Returns the quadrant
+     *
      * @param {number} x The point x-coordinate
      * @param {number} y The point y-coordinate
      * @param {number=} k The optional number of regions in the coordinate-system
@@ -209,19 +220,15 @@
 
       var phi = (Math.atan2(y, x) + TAU) / TAU;
 
-      var tmp = phi * s % (s / k);
-
-      if (Math.abs(tmp) < EPS) {
+      if (Math.abs(phi * s % (s / k)) < EPS) {
         return 0;
       }
 
-      var tmp = Math.floor(k * shift / s + k * phi);
-
-      return 1 + (tmp % k + k) % k;
+      return 1 + mod(Math.floor(k * shift / s + k * phi), k);
     },
     /**
      * Calculates the compass direction of the given angle
-     * 
+     *
      * @param {number} angle
      * @returns {string}
      */
@@ -232,7 +239,38 @@
 
       var dir = Math.round((angle / s) * k);
 
-      return DIRECTIONS[(dir % k + k) % k];
+      return DIRECTIONS[mod(dir, k)];
+    },
+    /**
+     * Calculates the linear interpolation of two angles
+     *
+     * @param {number} a Angle one
+     * @param {number} b Angle two
+     * @param {number} p Percentage
+     * @param {number} dir Direction (either 1 [=CW] or -1 [=CCW])
+     * @returns {number}
+     */
+    'lerp': function(a, b, p, dir) {
+
+      var c = this['SCALE'];
+      a = mod(a, c);
+      b = mod(b, c);
+
+      if (a === b)
+        return a;
+
+      if (dir === 1) {
+        if (a < b)
+          return mod(a - p * (a - b + c), c);
+        else
+          return mod(a - p * (a - b), c);
+      } else {
+
+        if (a < b)
+          return mod(a + p * (b - a), c);
+        else
+          return mod(a + p * (b - a + c), c);
+      }
     }
   };
 
@@ -247,4 +285,3 @@
   }
 
 })(this);
-

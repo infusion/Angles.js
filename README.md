@@ -17,6 +17,22 @@ console.log(angles.normalize(365)); // 5
 console.log(angles.normalize(-365)); // 355
 ```
 
+Simply calculate the linear interpolation of the smaller angle.
+
+```javascript
+var a = -30; // 330°
+var b = 30;
+var pct = 0.5; // Percentage between a and b
+
+angles.SCALE = 360;
+
+var dir = angles.shortestDirection(a, b); // -1 => Rotate CCW
+
+console.log(angles.lerp(a, b, pct, dir)); // => 0
+
+
+```
+
 Having the scale configurable opens a lot of possibilities, like calculating clock-angles:
 
 ```javascript
@@ -51,6 +67,10 @@ Determines if an angle `n` is between two other angles `a, b`. The angles don't 
 diff(a, b)
 ---
 Calculates the angular difference between two angles
+
+lerp(a, b, p[, dir=1])
+---
+Calculates the linear interpolation of two angles
 
 distance(a, b)
 ---
