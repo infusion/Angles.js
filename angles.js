@@ -252,20 +252,22 @@
      */
     'lerp': function(a, b, p, dir) {
 
-      var c = this['SCALE'];
-      a = mod(a, c);
-      b = mod(b, c);
+      var s = this['SCALE'];
+      a = mod(a, s);
+      b = mod(b, s);
 
       if (a === b)
         return a;
 
+      // dir becomes an offset if we have to add a full revolution (=scale)
       if (!dir)
-        dir = -1;
-
-      if (dir === 1 && a < b || dir !== 1 && !(a < b))
-        return mod(a - dir * p * (dir * a - dir * b + c), c);
+        dir =-s;
+      else if ((dir === 1) === (a < b))
+        dir*= s;
       else
-        return mod(a - dir * p * (dir * a - dir * b), c);
+        dir = 0;
+
+      return mod(a + p * (b - a - dir), s);
     }
   };
 
