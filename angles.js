@@ -259,18 +259,13 @@
       if (a === b)
         return a;
 
-      if (dir === 1) {
-        if (a < b)
-          return mod(a - p * (a - b + c), c);
-        else
-          return mod(a - p * (a - b), c);
-      } else {
+      if (!dir)
+        dir = -1;
 
-        if (a < b)
-          return mod(a + p * (b - a), c);
-        else
-          return mod(a + p * (b - a + c), c);
-      }
+      if (dir === 1 && a < b || dir !== 1 && !(a < b))
+        return mod(a - dir * p * (dir * a - dir * b + c), c);
+      else
+        return mod(a - dir * p * (dir * a - dir * b), c);
     }
   };
 
