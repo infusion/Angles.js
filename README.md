@@ -68,7 +68,7 @@ diff(a, b)
 ---
 Calculates the angular difference between two angles
 
-lerp(a, b, p[, dir=1])
+lerp(a, b, p[, dir=-1])
 ---
 Calculates the linear interpolation of two angles
 
