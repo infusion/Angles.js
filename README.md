@@ -102,7 +102,7 @@ Calculates the quadrant (with `k=4`, or octant with `k=8`) in which a point with
 
 compass(angle)
 ---
-Translates the angle to a point of the compass ("N", "NE", "E", "SE", "S", "SW", "W", "NW"). If you want to want to have the major directions only, remove every second element from the array `DIRECTIONS`.
+Translates the angle to a point of the compass ("N", "NE", "E", "SE", "S", "SW", "W", "NW") in the normal windrose way (N=0, E=90, S=180, W=270). If you want to want to have the major directions only, remove every second element from the array `DIRECTIONS`.
 
 Installation
 ===

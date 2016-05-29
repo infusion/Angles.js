@@ -12,9 +12,9 @@
   var TAU = 2 * Math.PI;
   var EPS = 1e-15;
 
-  var DIRECTIONS = [
-    "N", "NE", "E", "SE", "S", "SW", "W", "NW"
-  ];
+  // var DIRECTIONS = ["N", "E", "S", "W"];
+  var DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  // var DIRECTIONS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
 
   /**
    * Mathematical modulo
@@ -237,6 +237,8 @@
       var s = this['SCALE'];
       var k = DIRECTIONS.length;
 
+      // var dir = Math.trunc((angle + s / k / 2) / s * k);
+      // var dir = Math.trunc(angle * k / s + 0.5);
       var dir = Math.round((angle / s) * k);
 
       return DIRECTIONS[mod(dir, k)];
