@@ -90,7 +90,7 @@ Calculate gons from current angle (Unit 400)
 
 fromSlope(p1, p2)
 ---
-Calculates the angle given by two points (2 element arrays)
+Calculates the angle between the x-axis and the line formed by two points.
 
 fromSinCos(sin, cos)
 ---
