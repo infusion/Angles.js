@@ -66,8 +66,10 @@
       var z = from - to;
       // mod(-z, 360) < mod(z, 360) <=> mod(z + 180, 360) < 180       , for all z \ 180
 
+      if (from === to) {
+        return 0;
       // if (mod(-z, 360) < mod(z, 360)) {
-      if (this['normalizeHalf'](z) < 0) {
+      } else if (this['normalizeHalf'](z) < 0) {
         return -1; // Left
       } else {
         return +1; // Right
