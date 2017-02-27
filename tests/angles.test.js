@@ -30,6 +30,7 @@ var tests = [
   {m: 'fromSlope', p: [[345, -78445], [3475890, 8495]], r: 1.4329425927144732, s: 360},
   {m: 'shortestDirection', p: [50, 60], r: -1, s: 360},
   {m: 'shortestDirection', p: [60, 50], r: 1, s: 360},
+  {m: 'shortestDirection', p: [50, 50], r: 0, s: 360},
   {m: 'shortestDirection', p: [60 + 360 * 3, 50 + 360 * 7], r: 1, s: 360},
   {m: 'shortestDirection', p: [60 - 360 * 3, 50 - 360 * 7], r: 1, s: 360},
   {m: 'fromSinCos', p: [Math.sin(0.3), Math.cos(0.3)], r: 0.3, s: Math.PI * 2},
