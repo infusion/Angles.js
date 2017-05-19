@@ -234,14 +234,13 @@
      * @param {number} angle
      * @returns {string}
      */
-    'compass': function(angle) {
+    'compass': function(course) {
 
       var s = this['SCALE'];
       var k = DIRECTIONS.length;
 
-      // var dir = Math.trunc((angle + s / k / 2) / s * k);
-      // var dir = Math.trunc(angle * k / s + 0.5);
-      var dir = Math.round((angle / s) * k);
+      // floor((2ck + s) / (2s)) = round((c / s) * k)
+      var dir = Math.round(course / s * k);
 
       return DIRECTIONS[mod(dir, k)];
     },
