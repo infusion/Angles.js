@@ -236,6 +236,11 @@
      */
     'compass': function(course) {
 
+      // 0° = N
+      // 90° = E
+      // 180° = S
+      // 270° = W
+
       var s = this['SCALE'];
       var k = DIRECTIONS.length;
 
