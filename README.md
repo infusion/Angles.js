@@ -114,7 +114,7 @@ bower install angle
 or
 
 ```
-npm install --save angles
+npm install angles
 ```
 
 
