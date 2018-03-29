@@ -1,5 +1,5 @@
 /**
- * @license Angles.js v0.2.1 08/04/2016
+ * @license Angles.js v0.2.2 08/04/2016
  *
  * Copyright (c) 2015, Robert Eisele (robert@xarg.org)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -285,9 +285,9 @@
     });
   } else if (typeof exports === "object") {
     Object.defineProperty(exports, "__esModule", {'value': true});
+    Angles['default'] = Angles;
+    Angles['Angles'] = Angles;
     module['exports'] = Angles;
-    exports['Angles'] = Angles;
-    exports['default'] = Angles;
   } else {
     root['Angles'] = Angles;
   }
