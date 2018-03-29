@@ -1,5 +1,5 @@
 /**
- * @license Angles.js v0.2.0 08/04/2016
+ * @license Angles.js v0.2.1 08/04/2016
  *
  * Copyright (c) 2015, Robert Eisele (robert@xarg.org)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -68,7 +68,7 @@
 
       if (from === to) {
         return 0;
-      // if (mod(-z, 360) < mod(z, 360)) {
+        // if (mod(-z, 360) < mod(z, 360)) {
       } else if (this['normalizeHalf'](z) < 0) {
         return -1; // Left
       } else {
@@ -284,7 +284,10 @@
       return Angles;
     });
   } else if (typeof exports === "object") {
-    module["exports"] = Angles;
+    Object.defineProperty(exports, "__esModule", {'value': true});
+    module['exports'] = Angles;
+    exports['Angles'] = Angles;
+    exports['default'] = Angles;
   } else {
     root['Angles'] = Angles;
   }
