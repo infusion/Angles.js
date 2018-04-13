@@ -1,5 +1,5 @@
 /**
- * @license Angles.js v0.2.2 08/04/2016
+ * @license Angles.js v0.2.4 08/04/2016
  *
  * Copyright (c) 2015, Robert Eisele (robert@xarg.org)
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -9,12 +9,12 @@
 
   'use strict';
 
-  const TAU = 2 * Math.PI;
-  const EPS = 1e-15;
+  var TAU = 2 * Math.PI;
+  var EPS = 1e-15;
 
-  // const DIRECTIONS = ["N", "E", "S", "W"];
-  const DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-  // const DIRECTIONS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+  // var DIRECTIONS = ["N", "E", "S", "W"];
+  var DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  // var DIRECTIONS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
 
   /**
    * Mathematical modulo
@@ -27,7 +27,7 @@
     return (x % m + m) % m;
   }
 
-  const Angles = {
+  var Angles = {
     'SCALE': 360,
     /**
      * Normalize an arbitrary angle to the interval [-180, 180)
@@ -37,8 +37,8 @@
      */
     'normalizeHalf': function(n) {
 
-      const c = this['SCALE'];
-      const h = c / 2;
+      var c = this['SCALE'];
+      var h = c / 2;
 
       return mod(n + h, c) - h;
     },
@@ -50,7 +50,7 @@
      */
     'normalize': function(n) {
 
-      const c = this['SCALE'];
+      var c = this['SCALE'];
 
       return mod(n, c);
     },
@@ -63,7 +63,7 @@
      */
     'shortestDirection': function(from, to) {
 
-      const z = from - to;
+      var z = from - to;
       // mod(-z, 360) < mod(z, 360) <=> mod(z + 180, 360) < 180       , for all z \ 180
 
       if (from === to) {
@@ -85,7 +85,7 @@
      */
     'between': function(n, a, b) { // Check if an angle n is between a and b
 
-      const c = this['SCALE'];
+      var c = this['SCALE'];
       n = mod(n, c);
       a = mod(a, c);
       b = mod(b, c);
@@ -113,13 +113,13 @@
      */
     'distance': function(a, b) {
 
-      const m = this['SCALE'];
-      const h = m / 2;
+      var m = this['SCALE'];
+      var h = m / 2;
 
       // One-Liner:
       //return Math.min(mod(a - b, m), mod(b - a, m));
 
-      let diff = this['normalizeHalf'](a - b);
+      var diff = this['normalizeHalf'](a - b);
 
       if (diff > h)
         diff = diff - m;
@@ -165,8 +165,8 @@
      */
     'fromSinCos': function(sin, cos) {
 
-      const s = this['SCALE'];
-      let angle = (1 + Math.acos(cos) / TAU) * s;
+      var s = this['SCALE'];
+      var angle = (1 + Math.acos(cos) / TAU) * s;
 
       if (sin < 0) {
         angle = s - angle;
@@ -182,8 +182,8 @@
      */
     'fromSlope': function(p1, p2) {
 
-      const s = this['SCALE'];
-      const angle = (TAU + Math.atan2(p2[1] - p1[1], p2[0] - p1[0])) % TAU;
+      var s = this['SCALE'];
+      var angle = (TAU + Math.atan2(p2[1] - p1[1], p2[0] - p1[0])) % TAU;
 
       return angle / TAU * s;
     },
@@ -198,7 +198,7 @@
      */
     'quadrant': function(x, y, k, shift) {
 
-      const s = this['SCALE'];
+      var s = this['SCALE'];
 
       if (k === undefined)
         k = 4; // How many regions? 4 = quadrant, 8 = octant, ...
@@ -220,7 +220,7 @@
        *  IV) 270-360
        */
 
-      const phi = (Math.atan2(y, x) + TAU) / TAU;
+      var phi = (Math.atan2(y, x) + TAU) / TAU;
 
       if (Math.abs(phi * s % (s / k)) < EPS) {
         return 0;
@@ -241,11 +241,11 @@
       // 180° = S
       // 270° = W
 
-      const s = this['SCALE'];
-      const k = DIRECTIONS.length;
+      var s = this['SCALE'];
+      var k = DIRECTIONS.length;
 
       // floor((2ck + s) / (2s)) = round((c / s) * k)
-      const dir = Math.round(course / s * k);
+      var dir = Math.round(course / s * k);
 
       return DIRECTIONS[mod(dir, k)];
     },
@@ -260,7 +260,7 @@
      */
     'lerp': function(a, b, p, dir) {
 
-      const s = this['SCALE'];
+      var s = this['SCALE'];
       a = mod(a, s);
       b = mod(b, s);
 

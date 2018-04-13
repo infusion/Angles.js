@@ -1,7 +1,7 @@
 {
     "name": "angles",
     "title": "angles.js",
-    "version": "0.2.2",
+    "version": "0.2.4",
     "homepage": "https://github.com/infusion/Angles.js",
     "bugs": "https://github.com/infusion/Angles.js/issues",
     "description": "A function collection for working with angles",
