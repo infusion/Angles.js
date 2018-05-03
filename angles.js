@@ -276,7 +276,7 @@
         dir = 0;
 
       return mod(a + p * (b - a - dir), s);
-    }
+    },
   };
 
   if (typeof define === "function" && define["amd"]) {
