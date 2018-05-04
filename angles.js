@@ -276,7 +276,31 @@
         dir = 0;
 
       return mod(a + p * (b - a - dir), s);
-    }
+    },
+    /**
+     * Calculates the average (mean) angle of an array of angles
+     *
+     * @param {array} angles Angle array
+     * @returns {number}
+     */
+    'average': function(angles) {
+      var s = this['SCALE'];
+      
+      // Basically treat each angle as a vector, add all the vecotrs up,
+      // and return the angle of the resultant vector.
+
+      var y = angles.map(a => Math.sin(a * TAU / s)).reduce((a, b) => a + b);
+      var x = angles.map(a => Math.cos(a * TAU / s)).reduce((a, b) => a + b);
+      
+      // If the resultant vector is very short, this means the average angle is likely wrong or ambiguous.
+      // For instance, what if a users asks for the average of the angles [0, PI]?
+      
+      // TODO: Warn user (or return undefined / null / NaN) when using opposite angles
+      // Could be as simple as:
+      //if (x * x + y * y < EPS * EPS) return NaN;
+
+      return Math.atan2(y, x) * s / TAU;
+    },
   };
 
   if (typeof define === "function" && define["amd"]) {
