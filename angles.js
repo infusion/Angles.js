@@ -277,6 +277,23 @@
 
       return mod(a + p * (b - a - dir), s);
     },
+    /**
+     * Calculates the average (mean) angle of an array of angles
+     *
+     * @param {array} angles Angle array
+     * @returns {number}
+     */
+    'average': function(angles) {
+      var s = this['SCALE'];
+      
+      // Basically treat each angle as a vector, add all the vecotrs up,
+      // and return the angle of the resultant vector.
+
+      var y = angles.map(a => Math.sin(a * TAU / s)).reduce((a, b) => a + b);
+      var x = angles.map(a => Math.cos(a * TAU / s)).reduce((a, b) => a + b);
+
+      return Math.atan2(y, x) * s / TAU;
+    },
   };
 
   if (typeof define === "function" && define["amd"]) {
